@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import L from 'leaflet';
 
 const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
@@ -10,7 +11,7 @@ const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { 
 import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
-  const [position, setPosition] = useState([0, 0]);
+    const [position, setPosition] = useState([52.0943, 19.4565]);
   const [hasLocation, setHasLocation] = useState(false);
 
   useEffect(() => {
@@ -33,6 +34,16 @@ const Map = () => {
     }
   }, []);
 
+  const customIcon = new L.Icon({
+    iconUrl: 'https://www.seekpng.com/png/full/10-109643_red-eye-glow-png-graphic-stock-circle.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    shadowUrl: 'https://www.seekpng.com/png/full/10-109643_red-eye-glow-png-graphic-stock-circle.png',
+    shadowSize: [32, 32],
+    shadowAnchor: [16, 32],
+  });
+
   return (
     <MapContainer
       center={position}
@@ -50,7 +61,7 @@ const Map = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       {hasLocation && (
-        <Marker position={position}>
+        <Marker position={position} icon={customIcon}>
           <Popup>Your location</Popup>
         </Marker>
       )}
