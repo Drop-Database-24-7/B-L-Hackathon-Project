@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Stars, Cloud, OrbitControls } from '@react-three/drei'
-import "./App.css"
-import Welcome from './Welcome'
-import { Button } from '@mui/material'
+// import "./App.css"
 import * as THREE from 'three'
 
 function Box(props) {
@@ -58,31 +56,38 @@ function Main_Mesh() {
 
 
 function App() {
-  return (
-    <>
-    <div className='Welcome-main-text'>
-      <div className='Welcome-desc'>
-    <Welcome/>
-    <button>123</button>
-    {/* <Button  sx={{
-      color:'white', 
-      borderColor: 'black',
-      justifyItems:'center',
-      alignText:'center',
-      "&:hover": {
-          borderColor: 'white'
-        }}}  variant='outlined' onClick={() => setClicked(!buttonClicked)}>
-          <a style={{color:'white'}}href={'/welcome'}>
-            See more
-          </a>
-    </Button> */}
-    </div>
-    </div>
-    <Canvas camera={{position:[10,500,10]}}>
-      <Main_Mesh/>
-    </Canvas>
-    </>
-  )
-}
+    return (
+      <div className='bg-#242424'>
+        <div className='Welcome-main-text'>
+          <div className='Welcome-desc'>
+            {/* <Welcome/> */}
+            {/* <Button  sx={{
+              color:'white', 
+              borderColor: 'black',
+              justifyItems:'center',
+              alignText:'center',
+              "&:hover": {
+                  borderColor: 'white'
+                }}}  variant='outlined' onClick={() => setClicked(!buttonClicked)}>
+              <a style={{color:'white'}} href={'/welcome'}>
+                See more
+              </a>
+            </Button> */}
+          </div>
+        </div>
+        <div style={{ width: "100vw", height: "70vh" }}>
+          <Canvas camera={{ position: [10, 500, 10] }}>
+            <Main_Mesh />
+          </Canvas>
+          <div className='flex justify-center items-center absolute left-1/2 bottom-10 transform -translate-x-1/2'>
+            <button className='px-4 py-2 border-2 border-white text-white rounded-lg hover:bg-black-700 transition-all'>
+              Go To App
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
 
 export default App
