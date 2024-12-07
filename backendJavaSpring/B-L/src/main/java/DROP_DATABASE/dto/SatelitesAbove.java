@@ -9,11 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Getter
 @Setter
 public class SatelitesAbove {
     @JsonProperty("info")
     InfoAbove infoAbove;
     @JsonProperty("above")
     List<Object> above = new ArrayList<>();
+
+    public List<Object> getAbove() {
+        return above;
+    }
+
+    public InfoAbove getInfoAbove() {
+        return infoAbove;
+    }
 }
