@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="relative">
       
-      <Card className="absolute top-4 right-4 p-4 z-40 bg-black bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
+      <Card className="absolute top-6 right-4 p-4 z-40 bg-black bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
         <CardHeader>
           <CardTitle>Satelite Chooser</CardTitle>
         </CardHeader>
@@ -37,7 +37,7 @@ export default function Home() {
       <ImageCard
         imageUrl="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg" 
         altText="Opis obrazu" 
-        className="absolute bottom-14 right-4 z-30 w-64 h-64 rounded-lg shadow-lg"
+        className="absolute bottom-14 right-4 z-40 w-64 h-64 rounded-lg shadow-lg"
       />
     </div>
   );
