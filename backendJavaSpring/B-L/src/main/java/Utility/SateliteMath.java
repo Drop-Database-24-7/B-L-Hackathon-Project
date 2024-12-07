@@ -1,3 +1,5 @@
+package Utility;
+
 public class SateliteMath {
 
     public static double Distance(Point p1, Point p2) {
