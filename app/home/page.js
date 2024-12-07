@@ -5,8 +5,19 @@ import { Button } from "@/components/ui/button";
 // import Map from "@/components/Map";
 import { Slider } from "@/components/ui/slider";
 import  MapComponent from "@/components/MapComponent";
+import { getSatellites }  from '@/features/post'
+
+
+const onSubmit = async () => {
+  console.log("Hello From Submit");
+  const data = await getSatellites(52.0943, 19.4565);
+  console.log(data); // You should see the satellite data in the console
+};
 
 export default function Home() {
+
+    
+
   return (
     <div className="relative">
       
@@ -18,12 +29,11 @@ export default function Home() {
           <Combobox />
         </CardContent>
         <CardFooter>
-          <Button variant="outline">Show</Button>
+          <Button variant="outline" onClick={onSubmit}>Show</Button>
         </CardFooter>
       </Card>
 
       {/* Centered Slider Card */}
-      {/* <Card className="absolute bottom-14 left-1/2 transform -translate-x-1/2 p-4 z-40 bg-white bg-opacity-80 border border-gray-300 rounded-lg shadow-lg"> */}
       <Card className="absolute z-20 w-full bottom-0" >
         <CardContent className='p-4'>
           <Slider />
