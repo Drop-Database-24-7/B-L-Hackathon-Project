@@ -1,17 +1,22 @@
 package Utility;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class Point {
-    private double X;
-    private double Y;
+    private final float X;
+    private final float Y;
 
-    public Point(double x, double y) {
-        this.X = x;
-        this.Y = y;
+    public Point(float X, float Y) {
+        this.X = X;
+        this.Y = Y;
+    }
+    public static Point Of(float X, float Y){
+        return new Point(X,Y);
     }
 
+    public float getX() {
+        return X;
+    }
+
+    public float getY() {
+        return Y;
+    }
 }

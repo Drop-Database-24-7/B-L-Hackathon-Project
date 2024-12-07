@@ -8,12 +8,12 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-public class Info {
+public class InfoSatelite {
     @JsonProperty("satname")
-    private String satname;
+    private String satName;
     @JsonProperty("satid")
-    private float satid;
+    private float satId;
     @JsonProperty("transactionscount")
-    private float transactionscount;
+    private float transactionsCount;
 
 }

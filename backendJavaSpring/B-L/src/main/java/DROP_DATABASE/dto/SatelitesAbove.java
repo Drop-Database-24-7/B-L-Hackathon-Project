@@ -11,10 +11,9 @@ import java.util.List;
 @Data
 @Getter
 @Setter
-public class Satelite {
+public class SatelitesAbove {
     @JsonProperty("info")
-    InfoSatelite infoSateliteObject;
-    @JsonProperty("positions")
-    List<Object> positions = new ArrayList<>();
+    InfoAbove infoAbove;
+    @JsonProperty("above")
+    List<Object> above = new ArrayList<>();
 }
-
