@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import L from 'leaflet';
 import { useMap } from 'react-leaflet';
+import useLocationStore from '@/zooStor/store';
 
 const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
@@ -14,15 +15,18 @@ import 'leaflet/dist/leaflet.css';
 const Map = () => {
     const [position, setPosition] = useState([52.0943, 19.4565]);
     const [hasLocation, setHasLocation] = useState(false);
+    const { setLocation } = useLocationStore();
 
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    setPosition([latitude, longitude]);
-                    console.log(latitude + " " + longitude);
+                    const coords = [latitude, longitude];
+                    setPosition(coords);
                     setHasLocation(true);
+                    setLocation(coords);
+                    console.log("Lokalizacja wysłana do Zustand:", coords);
                 },
                 (error) => {
                     console.error("Błąd pobierania lokalizacji:", error);
@@ -33,7 +37,7 @@ const Map = () => {
             console.log("Geolokalizacja nie jest dostępna w tej przeglądarce.");
             setHasLocation(false);
         }
-    }, []);
+    }, [setLocation]);
 
     const customIcon = new L.Icon({
         iconUrl: 'https://www.seekpng.com/png/full/10-109643_red-eye-glow-png-graphic-stock-circle.png',
