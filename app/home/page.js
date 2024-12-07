@@ -6,6 +6,7 @@ import { Slider } from "@/components/ui/slider";
 import MapComponent from "@/components/MapComponent";
 import { ImageCard } from "@/components/ui/ImageCard";
 import useLocationStore from "@/zooStor/store";
+import useStoreImage from "@/zooStor/storeImage";
 
 const StatusDisplay = () => {
   const { location, isReady } = useLocationStore();
@@ -24,6 +25,12 @@ const StatusDisplay = () => {
 };
 
 export default function Home() {
+  const { isImageReady, imageUrl, setImage } = useStoreImage();
+
+  const handleShowClick = () => {
+    setImage("https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg");
+  };
+
   return (
     <div className="relative">
       {/* Satelite Chooser */}
@@ -35,7 +42,7 @@ export default function Home() {
           <Combobox />
         </CardContent>
         <CardFooter>
-          <Button variant="outline">Show</Button>
+          <Button variant="outline" onClick={handleShowClick}>Show</Button>
         </CardFooter>
       </Card>
 
@@ -49,13 +56,16 @@ export default function Home() {
       {/* Map Component */}
       <MapComponent />
 
-      <ImageCard
-        imageUrl="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg"
-        altText="Opis obrazu"
-        className="absolute bottom-14 right-4 z-40 w-64 h-64 rounded-lg shadow-lg"
-      />
+      {/* Conditional ImageCard */}
+      {isImageReady && (
+        <ImageCard
+          imageUrl={imageUrl}
+          altText="Opis obrazu"
+          className="absolute bottom-14 right-4 z-40 w-64 h-64 rounded-lg shadow-lg"
+        />
+      )}
 
-      <StatusDisplay/>
+      <StatusDisplay />
     </div>
   );
 }
