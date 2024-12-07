@@ -6,38 +6,41 @@ import Link from 'next/link'
 import * as THREE from 'three'
 
 function Box(props) {
-  const ref = useRef()
-  const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
-  useFrame((state, delta) => (ref.current.rotation.y += delta))
+    const ref = useRef();
+    const [hovered, hover] = useState(false);
+    const [clicked, click] = useState(false);
+    
+    useFrame((state, delta) => (ref.current.rotation.y += delta));
   
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 2 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}>
-      <sphereGeometry />
-      <meshPhongMaterial wireframe color={hovered ? 'orange' : 'white'} />
-    </mesh>
-  )
-}
+    return (
+      <mesh
+        {...props}
+        ref={ref}
+        scale={clicked ? 5 : 3}  // Adjust this value to resize the planet
+        onClick={(event) => click(!clicked)}
+        onPointerOver={(event) => hover(true)}
+        onPointerOut={(event) => hover(false)}>
+        {/* <sphereGeometry /> */}
+        <meshPhongMaterial wireframe color={hovered ? 'orange' : 'white'} />
+      </mesh>
+    );
+  }
+  
 
-function Main_Mesh() {
-  const [buttonClicked, setCamera] = useState(false)
-  const markerRef = useRef();
-  const vec = new THREE.Vector3()
-
-  useFrame(state => {
-    if (buttonClicked) {
-      state.camera.lookAt(markerRef.current.position)
-      state.camera.position.lerp(vec.set(0,0,0), .01)
-      state.camera.updateProjectionMatrix()
-    }
-    return null
-  })
+  function Main_Mesh() {
+    const [planetSize, setPlanetSize] = useState(3);  // Default planet size
+    const markerRef = useRef();
+    const vec = new THREE.Vector3();
+  
+    useFrame((state) => {
+      if (planetSize > 0) {
+        state.camera.lookAt(markerRef.current.position);
+        state.camera.position.lerp(vec.set(0, 0, 0), 0.01);
+        state.camera.updateProjectionMatrix();
+      }
+      return null;
+    });
+  
 
   return (
     <mesh ref={markerRef} >
@@ -60,13 +63,13 @@ function App() {
         </div>
       </div>
 
-      <div style={{ width: "100vw", height: "70vh" }}>
+      <div className='w-full h-size-3/4' style={{ width: "100vw", height: "70vh" }}>
         <Canvas camera={{ position: [10, 500, 10] }} style={{ background: 'black' }}>
           <Main_Mesh />
         </Canvas>
 
           <h1 className='flex text-7xl text-white font-24 justify-center'>
-            GoGoSatelite 
+            GoGoSatelite
            </h1>
         <div className='flex justify-center items-center absolute left-1/2 bottom-10 transform -translate-x-1/2'>
           <Link href="/home">
