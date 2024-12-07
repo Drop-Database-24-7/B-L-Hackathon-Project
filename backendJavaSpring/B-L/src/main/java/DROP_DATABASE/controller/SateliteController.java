@@ -49,20 +49,24 @@ public class SateliteController {
         return sateliteTmpList;
     }
 
-    @GetMapping("/getImageForSatelite/{sateliteId}/{observer_lat}/{observer_lng}")
+    @GetMapping("/getImageForSatelite/{sateliteId}")
 
-    public String getImageUrlForSatelite(@PathVariable String sateliteId, @PathVariable float observer_lat, @PathVariable float observer_lng ) {
-        Satelite satelite = sateliteService.getSatelite(Integer.parseInt(sateliteId), Point.Of(observer_lng, observer_lat));
-        LinkedHashMap<String, Object> locationMap = satelite.getPositions().getFirst();
-        double lon = (double) locationMap.get("satlongitude");
-        double lat = (double) locationMap.get("satlongitude");
+    public String getImageUrlForSatelite(@PathVariable String sateliteId) {
+        Satelite satelite = sateliteService.getSatelite(Integer.parseInt(sateliteId), Point.Of(20, 20));
+        try {
+            LinkedHashMap<String, Object> locationMap = satelite.getPositions().getFirst();
+            double lon = (double) locationMap.get("satlongitude");
+            double lat = (double) locationMap.get("satlongitude");
 
-        String returnString;
-        try{
-            returnString = imageService.getImage(Point.Of((float) lat,(float) lon)).getImageUrl();
-        } catch (Exception e) {
-            returnString = "Image not avaliable for coordinates: " + lat + " " + lon;
+            String returnString;
+            try {
+                returnString = imageService.getImage(Point.Of((float) lat, (float) lon)).getImageUrl();
+            } catch (Exception e) {
+                returnString = "Image not avaliable for coordinates: " + lat + " " + lon;
+            }
+            return returnString;
+        } catch (Exception e){
+            return "Satelite not found";
         }
-        return  returnString;
     }
 }
