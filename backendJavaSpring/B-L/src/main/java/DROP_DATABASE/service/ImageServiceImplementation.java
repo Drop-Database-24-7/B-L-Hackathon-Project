@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ImageServiceImplementation implements ImageService {
-
     private final ImageComponent imageComponent;
 
     public ImageServiceImplementation(ImageComponent imageComponent){

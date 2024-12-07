@@ -40,5 +40,4 @@ public class SateliteComponent {
                 + API_KEY;
         return restTemplate.getForObject(apiUrl, SatelitesAbove.class);
     }
-
 }

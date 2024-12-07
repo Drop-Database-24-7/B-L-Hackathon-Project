@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/satelite")
@@ -53,12 +51,12 @@ public class SateliteController {
 
     public String getImageUrlForSatelite(@PathVariable String sateliteId) {
         Satelite satelite = sateliteService.getSatelite(Integer.parseInt(sateliteId), Point.Of(20, 20));
+        String returnString;
         try {
             LinkedHashMap<String, Object> locationMap = satelite.getPositions().getFirst();
             double lon = (double) locationMap.get("satlongitude");
             double lat = (double) locationMap.get("satlongitude");
 
-            String returnString;
             try {
                 returnString = imageService.getImage(Point.Of((float) lat, (float) lon)).getImageUrl();
             } catch (Exception e) {

@@ -11,11 +11,9 @@ public class Point {
     public static Point Of(float X, float Y){
         return new Point(X,Y);
     }
-
     public float getX() {
         return X;
     }
-
     public float getY() {
         return Y;
     }

@@ -1,7 +1,6 @@
 package DROP_DATABASE.controller;
 
 import DROP_DATABASE.dto.Image;
-import DROP_DATABASE.dto.Satelite;
 import Utility.Point;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

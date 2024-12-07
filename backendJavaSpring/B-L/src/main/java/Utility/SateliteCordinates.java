@@ -12,19 +12,15 @@ public class SateliteCordinates {
         this.satlat = satlat;
         this.satlng = satlng;
     }
-
     public int getSatid() {
         return satid;
     }
-
     public String getSatname() {
         return satname;
     }
-
     public float getSatlat() {
         return satlat;
     }
-
     public float getSatlng() {
         return satlng;
     }
