@@ -19,4 +19,8 @@ public class Image {
     String serviceVersion;
     @JsonProperty("url")
     String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Data
@@ -15,6 +16,10 @@ public class Satelite {
     @JsonProperty("info")
     InfoSatelite infoSateliteObject;
     @JsonProperty("positions")
-    List<Object> positions = new ArrayList<>();
+    List<LinkedHashMap<String,Object>> positions = new ArrayList<>();
+
+    public List<LinkedHashMap<String,Object>> getPositions() {
+        return positions;
+    }
 }
 

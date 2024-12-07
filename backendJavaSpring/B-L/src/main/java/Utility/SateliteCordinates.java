@@ -3,10 +3,10 @@ package Utility;
 public class SateliteCordinates {
     private int satid;
     private String satname;
-    private double satlat;
-    private double satlng;
+    private float satlat;
+    private float satlng;
 
-    public SateliteCordinates(int satid,String satname, double satlat, double satlng) {
+    public SateliteCordinates(int satid,String satname, float satlat, float satlng) {
         this.satid = satid;
         this.satname = satname;
         this.satlat = satlat;
@@ -21,11 +21,11 @@ public class SateliteCordinates {
         return satname;
     }
 
-    public double getSatlat() {
+    public float getSatlat() {
         return satlat;
     }
 
-    public double getSatlng() {
+    public float getSatlng() {
         return satlng;
     }
 }
