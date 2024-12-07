@@ -4,13 +4,14 @@ import { Combobox } from "@/components/ui/Combobox";
 import { Button } from "@/components/ui/button";
 // import Map from "@/components/Map";
 import { Slider } from "@/components/ui/slider";
-import  MapComponent from "@/components/MapComponent";
+import MapComponent from "@/components/MapComponent";
+import { ImageCard } from "@/components/ui/ImageCard";
 
 export default function Home() {
   return (
     <div className="relative">
       
-      <Card className="absolute top-4 right-4 p-4 z-40 bg-white bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
+      <Card className="absolute top-4 right-4 p-4 z-40 bg-black bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
         <CardHeader>
           <CardTitle>Satelite Chooser</CardTitle>
         </CardHeader>
@@ -23,7 +24,6 @@ export default function Home() {
       </Card>
 
       {/* Centered Slider Card */}
-      {/* <Card className="absolute bottom-14 left-1/2 transform -translate-x-1/2 p-4 z-40 bg-white bg-opacity-80 border border-gray-300 rounded-lg shadow-lg"> */}
       <Card className="absolute z-20 w-full bottom-0" >
         <CardContent className='p-4'>
           <Slider />
@@ -31,9 +31,14 @@ export default function Home() {
       </Card>
 
       {/* Map Component */}
-      {/* <Map /> */}
-      {/* <Map/> */}
       <MapComponent/>
-      </div>
+
+      {/* ImageCard in the bottom right corner */}
+      <ImageCard
+        imageUrl="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg" 
+        altText="Opis obrazu" 
+        className="absolute bottom-14 right-4 z-30 w-64 h-64 rounded-lg shadow-lg"
+      />
+    </div>
   );
 }
