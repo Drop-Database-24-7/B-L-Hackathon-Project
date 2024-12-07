@@ -1,18 +1,16 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react' 
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Stars, Cloud, OrbitControls } from '@react-three/drei'
 // import "./App.css"
+import Link from 'next/link'
 import * as THREE from 'three'
 
 function Box(props) {
-  // This reference gives us direct access to the THREE.Mesh object
   const ref = useRef()
-  // Hold state for hovered and clicked events
   const [hovered, hover] = useState(false)
   const [clicked, click] = useState(false)
-  // Subscribe this component to the render-loop, rotate the mesh every frame
   useFrame((state, delta) => (ref.current.rotation.y += delta))
-  // Return the view, these are regular Threejs elements expressed in JSX
+  
   return (
     <mesh
       {...props}
@@ -28,7 +26,6 @@ function Box(props) {
 }
 
 function Main_Mesh() {
-
   const [buttonClicked, setCamera] = useState(false)
   const markerRef = useRef();
   const vec = new THREE.Vector3()
@@ -44,7 +41,7 @@ function Main_Mesh() {
 
   return (
     <mesh ref={markerRef} >
-    <ambientLight />
+      <ambientLight />
       <OrbitControls autoRotate autoRotateSpeed={.5} enableZoom={false} enablePan={false}/>
       <Cloud/>
       <Stars speed={.5}/>
@@ -54,40 +51,33 @@ function Main_Mesh() {
   )
 }
 
-
 function App() {
-    return (
-      <div className='bg-#242424'>
-        <div className='Welcome-main-text'>
-          <div className='Welcome-desc'>
-            {/* <Welcome/> */}
-            {/* <Button  sx={{
-              color:'white', 
-              borderColor: 'black',
-              justifyItems:'center',
-              alignText:'center',
-              "&:hover": {
-                  borderColor: 'white'
-                }}}  variant='outlined' onClick={() => setClicked(!buttonClicked)}>
-              <a style={{color:'white'}} href={'/welcome'}>
-                See more
-              </a>
-            </Button> */}
-          </div>
-        </div>
-        <div style={{ width: "100vw", height: "70vh" }}>
-          <Canvas camera={{ position: [10, 500, 10] }}>
-            <Main_Mesh />
-          </Canvas>
-          <div className='flex justify-center items-center absolute left-1/2 bottom-10 transform -translate-x-1/2'>
-            <button className='px-4 py-2 border-2 border-white text-white rounded-lg hover:bg-black-700 transition-all'>
-              Go To App
-            </button>
-          </div>
+  return (
+    <div className="bg-black min-h-screen">
+      <div className='Welcome-main-text'>
+        <div className='Welcome-desc'>
+          {/* Add any other content or components here */}
         </div>
       </div>
-    );
-  }
-  
+
+      <div style={{ width: "100vw", height: "70vh" }}>
+        <Canvas camera={{ position: [10, 500, 10] }} style={{ background: 'black' }}>
+          <Main_Mesh />
+        </Canvas>
+
+          <h1 className='flex text-7xl text-white font-24 justify-center'>
+            GoGoSatelite 
+           </h1>
+        <div className='flex justify-center items-center absolute left-1/2 bottom-10 transform -translate-x-1/2'>
+          <Link href="/home">
+            <button className='px-4 py-2 border-2 border-white text-white rounded-lg hover:bg-black-700 transition-all'>
+             Go To App
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default App
