@@ -1,5 +1,12 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
+const Circle = dynamic(() => import('react-leaflet').then((mod) => mod.Circle), { ssr: false });
+
 import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
@@ -28,9 +35,14 @@ const Map = () => {
   return (
     <MapContainer
       center={position}
-      zoom={6}
+      zoom={13}
       style={{ height: '100vh', width: '100%' }}
       className="z-10"
+      whenCreated={(map) => {
+        if (hasLocation) {
+          map.setView(position, 16, { animate: true });
+        }
+      }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -38,7 +50,7 @@ const Map = () => {
       />
       {hasLocation && (
         <Marker position={position}>
-          <Popup>Twoja aktualna lokalizacja</Popup>
+          <Popup>Your location</Popup>
         </Marker>
       )}
     </MapContainer>
