@@ -5,7 +5,6 @@ import DROP_DATABASE.dto.SatelitesAbove;
 import DROP_DATABASE.service.SateliteService;
 import Utility.Point;
 import Utility.SateliteCordinates;
-import Utility.SateliteTmp;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,14 +34,13 @@ public class SateliteController {
     }
 
     @GetMapping("/getAllAbove/{observer_lat}/{observer_lng}/trunc")
-    public List<SateliteCordinates> getAllAbovetrung(@PathVariable float observer_lat, @PathVariable float observer_lng) {
+    public List<SateliteCordinates> getAllAbovetrunc(@PathVariable float observer_lat, @PathVariable float observer_lng) {
         List<SateliteCordinates> sateliteTmpList = new ArrayList<>();
-        for (Object saO : sateliteService.getAllAbove(Point.Of(observer_lat, observer_lng)).getAbove()) {
-            LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) saO;
-            int satid = (int) map.get("satid");
-            String satname = (String) map.get("satname");
-            double satlat = (double) map.get("satlat");
-            double satlng = (double) map.get("satlng");
+        for (LinkedHashMap<String, Object> saO : sateliteService.getAllAbove(Point.Of(observer_lat, observer_lng)).getAbove()) {
+            int satid = (int) saO.get("satid");
+            String satname = (String) saO.get("satname");
+            double satlat = (double) saO.get("satlat");
+            double satlng = (double) saO.get("satlng");
 
             SateliteCordinates sateliteCordinates = new SateliteCordinates(satid,satname, satlat, satlng);
             sateliteTmpList.add(sateliteCordinates);
