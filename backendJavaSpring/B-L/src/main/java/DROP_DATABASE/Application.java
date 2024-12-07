@@ -21,19 +21,19 @@ public class Application {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/satelite/{id}/{observer_lat}/{observer_lng}")
-						.allowedOrigins("")
+						.allowedOrigins("http://localhost:3000/", "*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 				registry.addMapping("/satelite/getAllAbove/{observer_lat}/{observer_lng}")
-						.allowedOrigins("")
+						.allowedOrigins("http://localhost:3000/", "*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 				registry.addMapping("/satelite/getAllAbove/{observer_lat}/{observer_lng}/trunc")
-						.allowedOrigins("*")
+						.allowedOrigins("http://localhost:3000/", "*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 				registry.addMapping("/satelite/getImageForSatelite/{sateliteId}")
-						.allowedOrigins("*")
+						.allowedOrigins("http://localhost:3000/", "*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 				registry.addMapping("/image/{lat}/{lng}")
-						.allowedOrigins("*")
+						.allowedOrigins("http://localhost:3000/", "*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
 		};
