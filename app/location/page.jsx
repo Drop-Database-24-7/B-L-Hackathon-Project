@@ -7,7 +7,6 @@ import { getSatelites } from '@/features/get'
 function App() {
 
   return (
-    // <Geolocation />
     <div>Hello</div>
 
   );

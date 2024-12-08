@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { useMap } from 'react-leaflet';
 import useLocationStore from '@/zooStore/store';
 import useSatelliteStore from '@/zooStore/satellitesStore';
-import { getImage } from '@/features/get'; // make sure getImage is imported
+import { getImage } from '@/features/get';
 import useStoreImage from "@/zooStore/storeImage";
 
 const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
@@ -17,13 +17,12 @@ import 'leaflet/dist/leaflet.css';
 const Map = () => {
   const [position, setPosition] = useState([52.0943, 19.4565]);
   const [hasLocation, setHasLocation] = useState(false);
+  const [hasCentered, setHasCentered] = useState(false);
   const { setLocation } = useLocationStore();
   const { satellites } = useSatelliteStore();
 
-
   const { isImageReady, imageUrl, setImage } = useStoreImage();
-  const { currentSat, sattellites, setSatellites } = useSatelliteStore()
-
+  const { currentSat, sattellites, setSatellites } = useSatelliteStore();
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -67,24 +66,24 @@ const Map = () => {
   const CenterMapOnLocation = () => {
     const map = useMap();
     useEffect(() => {
-      if (hasLocation) {
+      if (hasLocation && !hasCentered) {
         map.setView(position, 5, { animate: true });
+        setHasCentered(true);
       }
-    }, [position, hasLocation, map]);
+    }, [position, hasLocation, hasCentered, map]);
 
     return null;
   };
 
-  // Function to handle satellite marker click
   const handleSatelliteClick = async (satelliteId) => {
-    const imageData = await getImage(satelliteId); // Fetch satellite image using its ID
-    setImage(imageData); // Assuming you have a method to set the image in your Zustand store
+    const imageData = await getImage(satelliteId);
+    setImage(imageData);
   };
 
   return (
     <MapContainer
       center={position}
-      zoom={5}
+      zoom={3}
       style={{ height: '100vh', width: '100%' }}
       className="z-10"
     >
@@ -106,7 +105,7 @@ const Map = () => {
           position={[satellite.satlat, satellite.satlng]}
           icon={satelliteIcon}
           eventHandlers={{
-            click: () => handleSatelliteClick(satellite.satid), // Call on click
+            click: () => handleSatelliteClick(satellite.satid),
           }}
         >
           <Popup>{satellite.satname}</Popup>
