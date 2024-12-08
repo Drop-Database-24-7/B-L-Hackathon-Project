@@ -19,7 +19,7 @@ public class ImageComponent {
                 + location.getY()
                 + "&lat="
                 + location.getX()
-                + "&dim=0.45&api_key="
+                + "&dim=0.25&api_key="
                 + API_KEY;
         return restTemplate.getForObject(apiUrl, Image.class);
     }
