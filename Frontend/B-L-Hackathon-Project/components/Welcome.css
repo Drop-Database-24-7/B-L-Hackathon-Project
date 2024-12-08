@@ -1,0 +1,60 @@
+.Welcome-main-text
+{
+    position: absolute;
+    width:400px;
+    height:400px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%); /* Center the item */
+    z-index: 200;
+}
+
+.Welcome-title
+{
+    padding:0;
+    margin: 0;
+    text-align: center;
+
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+
+}
+
+.Welcome-desc
+{
+    color:#fff;
+    position: relative;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+
+
+.Welcome-additional-desc
+{
+    margin-top:40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+
+    color:#fff;
+
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+
+}
+
+.animation-letters
+{
+    font-size: 40px;
+    text-align: center;
+    
+}
