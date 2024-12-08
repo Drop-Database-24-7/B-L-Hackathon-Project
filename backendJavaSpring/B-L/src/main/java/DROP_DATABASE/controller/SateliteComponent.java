@@ -36,7 +36,7 @@ public class SateliteComponent {
                 + "/"
                 + observerPoint.getY()
                 + "/"
-                + "0/15/0/&apiKey="
+                + "0/10/0/&apiKey="
                 + API_KEY;
         return restTemplate.getForObject(apiUrl, SatelitesAbove.class);
     }
