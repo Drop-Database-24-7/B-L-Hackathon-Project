@@ -12,11 +12,21 @@ import useSatelliteStore from "@/zooStore/satellitesStore";
 import useStoreImage from "@/zooStore/storeImage";
 
 
-
 const StatusDisplay = () => {
   const { location, isReady } = useLocationStore();
+  const { sattellites, setSatellites } = useSatelliteStore();
+
   
-    
+  useEffect(() => {
+    if (isReady) {
+      const fetchSatellites = async () => {
+        console.log("Fetching satellites...");
+        const data = await getSatellites(52.0943, 19.4565);
+        setSatellites(data);
+      };
+      fetchSatellites();
+    }
+  }, [isReady, setSatellites]);
 
   return (
     <Card className="absolute bottom-14 left-4 z-40 p-0 bg-black text-white bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
@@ -32,26 +42,16 @@ const StatusDisplay = () => {
 };
 
 export default function Home() {
-
   const { isImageReady, imageUrl, setImage } = useStoreImage();
 
   const handleShowClick = () => {
     setImage("https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg");
   };
 
-
-    const { sattellites, setSatellites } = useSatelliteStore()
-    const onSubmit = async () => {
-      console.log("Hello From Submit");
-      const data = await getSatellites(52.0943, 19.4565);
-      setSatellites(data)
-    }
-
-
   return (
     <div className="relative">
       {/* Satelite Chooser */}
-      <Card className="absolute top-6 right-4 p-4 z-40 bg-black bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
+      <Card className="absolute top-6 right-4 p-4 z-40 bg-black text-black bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
         <CardHeader>
           <CardTitle>Satelite Chooser</CardTitle>
         </CardHeader>
@@ -59,7 +59,6 @@ export default function Home() {
           <Combobox />
         </CardContent>
         <CardFooter>
-          <Button variant="outline" onClick={onSubmit}>Show</Button>
           <Button variant="outline" onClick={handleShowClick}>Show</Button>
         </CardFooter>
       </Card>

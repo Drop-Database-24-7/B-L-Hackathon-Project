@@ -20,28 +20,6 @@ import {
 } from "@/components/ui/popover"
 import useSatelliteStore from "@/zooStore/satellitesStore"
 
-const frameworks = [
-  {
-    value: "satelite1",
-    label: "Satelite1",
-  },
-  {
-    value: "satelite2",
-    label: "Satelite2",
-  },
-  {
-    value: "satelite3",
-    label: "Satelite3",
-  },
-  {
-    value: "satelite4",
-    label: "Satelite4",
-  },
-  {
-    value: "satelite5",
-    label: "Satelite5",
-  },
-]
 
 export function Combobox() {
   const [open, setOpen] = React.useState(false)

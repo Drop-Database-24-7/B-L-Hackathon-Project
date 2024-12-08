@@ -4,7 +4,7 @@ const satelites = 'satelite/getAllAbove/';
 
 
 export async function getSatellites(lat, long) {
-    const url = `${rootUrl}${satelites}${lat}/${long}`;  // Construct the URL dynamically using lat and long
+    const url = `${rootUrl}${satelites}${lat}/${long}`;
 
     try {
         console.log("Fetching satellites...");
@@ -24,7 +24,7 @@ export async function getSatellites(lat, long) {
         const data = await response.json();
         console.log('Success:', data);
         console.log('Saved to Zustand: ', satelites)
-        return data;  // Return the actual data, not the response
+        return data;
 
     } catch (error) {
         console.error('Error:', error);

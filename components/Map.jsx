@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import L from 'leaflet';
@@ -52,7 +51,7 @@ const Map = () => {
   });
 
   const satelliteIcon = new L.Icon({
-    iconUrl: 'https://e7.pngegg.com/pngimages/930/407/png-clipart-satellite-navigation-technology-business-system-technology-angle-electronics.png',
+    iconUrl: 'https://pngimg.com/d/satellite_PNG15.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
@@ -62,7 +61,7 @@ const Map = () => {
     const map = useMap();
     useEffect(() => {
       if (hasLocation) {
-        map.setView(position, 16, { animate: true });
+        map.setView(position, 8, { animate: true });
       }
     }, [position, hasLocation, map]);
 
@@ -72,7 +71,7 @@ const Map = () => {
   return (
     <MapContainer
       center={position}
-      zoom={13}
+      zoom={5}
       style={{ height: '100vh', width: '100%' }}
       className="z-10"
     >
@@ -87,11 +86,16 @@ const Map = () => {
         </Marker>
       )}
       
-      {/* {satellites.above?.map((satellite) => (
-        <Marker key={satellite.id} position={satellite.position} icon={satelliteIcon}>
-          <Popup>{satellite.name}</Popup>
+      {/* Render satellites on the map */}
+      {satellites?.above?.map((satellite) => (
+        <Marker
+          key={satellite.satid}
+          position={[satellite.satlat, satellite.satlng]}
+          icon={satelliteIcon}
+        >
+          <Popup>{satellite.satname}</Popup>
         </Marker>
-      ))} */}
+      ))}
     </MapContainer>
   );
 };
