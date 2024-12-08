@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import L from 'leaflet';
 import { useMap } from 'react-leaflet';
-import useLocationStore from '@/zooStor/store';
-import useSatelliteStore from '@/zooStor/satelliteStore';
+import useLocationStore from '@/zooStore/store';
+import useSatelliteStore from '@/zooStore/satellitesStore';
 
 const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });

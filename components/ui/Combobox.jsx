@@ -18,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import useSatelliteStore from "@/zooStore/satellitesStore"
 
 const frameworks = [
   {
@@ -46,6 +47,10 @@ export function Combobox() {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
+  const { satellites } = useSatelliteStore() 
+  
+   
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -56,7 +61,7 @@ export function Combobox() {
           className="w-[200px] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
+            ? satellites.find((sat) => sat.satname === value)?.label
             : "Select satelite..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -65,12 +70,12 @@ export function Combobox() {
         <Command>
           <CommandInput placeholder="Search satelite..." />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>No found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {satellites.above?.map((sat) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={sat.satname}
+                  value={sat.value}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)
@@ -79,10 +84,10 @@ export function Combobox() {
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value === sat.satname ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {framework.label}
+                  {sat.satname}
                 </CommandItem>
               ))}
             </CommandGroup>
