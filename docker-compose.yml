@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  frontend:
+   image: front:latest
+   ports:
+      - "3000:3000"
+  backend:
+    image: back:latest
+    ports:
+      - "8080:8080"
