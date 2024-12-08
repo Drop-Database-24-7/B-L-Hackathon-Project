@@ -9,6 +9,7 @@ import { ImageCard } from "@/components/ui/ImageCard";
 import useLocationStore from "@/zooStore/store";
 import { useEffect, useState } from "react";
 import useSatelliteStore from "@/zooStore/satellitesStore";
+import useStoreImage from "@/zooStore/storeImage";
 
 
 
@@ -32,6 +33,12 @@ const StatusDisplay = () => {
 
 export default function Home() {
 
+  const { isImageReady, imageUrl, setImage } = useStoreImage();
+
+  const handleShowClick = () => {
+    setImage("https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg");
+  };
+
 
     const { sattellites, setSatellites } = useSatelliteStore()
     const onSubmit = async () => {
@@ -53,6 +60,7 @@ export default function Home() {
         </CardContent>
         <CardFooter>
           <Button variant="outline" onClick={onSubmit}>Show</Button>
+          <Button variant="outline" onClick={handleShowClick}>Show</Button>
         </CardFooter>
       </Card>
 
@@ -66,13 +74,16 @@ export default function Home() {
       {/* Map Component */}
       <MapComponent />
 
-      <ImageCard
-        imageUrl="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg"
-        altText="Opis obrazu"
-        className="absolute bottom-14 right-4 z-40 w-64 h-64 rounded-lg shadow-lg"
-      />
+      {/* Conditional ImageCard */}
+      {isImageReady && (
+        <ImageCard
+          imageUrl={imageUrl}
+          altText="Opis obrazu"
+          className="absolute bottom-14 right-4 z-40 w-64 h-64 rounded-lg shadow-lg"
+        />
+      )}
 
-      <StatusDisplay/>
+      <StatusDisplay />
     </div>
   );
 }
