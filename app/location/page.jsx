@@ -1,6 +1,6 @@
 "use client"
 import Geolocation from '@/components/location'
-import { getSatelites } from '@/features/post'
+import { getSatelites } from '@/features/get'
 
 
 
