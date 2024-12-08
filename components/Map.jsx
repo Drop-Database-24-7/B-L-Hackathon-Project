@@ -4,6 +4,8 @@ import L from 'leaflet';
 import { useMap } from 'react-leaflet';
 import useLocationStore from '@/zooStore/store';
 import useSatelliteStore from '@/zooStore/satellitesStore';
+import { getImage } from '@/features/get'; // make sure getImage is imported
+import useStoreImage from "@/zooStore/storeImage";
 
 const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
@@ -17,6 +19,11 @@ const Map = () => {
   const [hasLocation, setHasLocation] = useState(false);
   const { setLocation } = useLocationStore();
   const { satellites } = useSatelliteStore();
+
+
+  const { isImageReady, imageUrl, setImage } = useStoreImage();
+  const { currentSat, sattellites, setSatellites } = useSatelliteStore()
+
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -61,11 +68,17 @@ const Map = () => {
     const map = useMap();
     useEffect(() => {
       if (hasLocation) {
-        map.setView(position, 8, { animate: true });
+        map.setView(position, 5, { animate: true });
       }
     }, [position, hasLocation, map]);
 
     return null;
+  };
+
+  // Function to handle satellite marker click
+  const handleSatelliteClick = async (satelliteId) => {
+    const imageData = await getImage(satelliteId); // Fetch satellite image using its ID
+    setImage(imageData); // Assuming you have a method to set the image in your Zustand store
   };
 
   return (
@@ -85,13 +98,16 @@ const Map = () => {
           <Popup>Your location</Popup>
         </Marker>
       )}
-      
+
       {/* Render satellites on the map */}
       {satellites?.above?.map((satellite) => (
         <Marker
           key={satellite.satid}
           position={[satellite.satlat, satellite.satlng]}
           icon={satelliteIcon}
+          eventHandlers={{
+            click: () => handleSatelliteClick(satellite.satid), // Call on click
+          }}
         >
           <Popup>{satellite.satname}</Popup>
         </Marker>

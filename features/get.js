@@ -5,7 +5,7 @@ const rootUrl = 'http://localhost:8080/';
 
 export async function getSatellites(lat, long) {
     const satelites = 'satelite/getAllAbove/';
-    const url = `${rootUrl}${satelites}${lat}/${long}`;  // Construct the URL dynamically using lat and long
+    const url = `${rootUrl}${satelites}${lat}/${long}`;
 
     try {
         console.log("Fetching satellites...");
