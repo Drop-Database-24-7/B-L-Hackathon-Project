@@ -49,8 +49,9 @@ public class SateliteController {
 
     @GetMapping("/getImageForSatelite/{sateliteId}")
 
-    public String getImageUrlForSatelite(@PathVariable String sateliteId) {
+    public Map<String, String> getImageUrlForSatelite(@PathVariable String sateliteId) {
         Satelite satelite = sateliteService.getSatelite(Integer.parseInt(sateliteId), Point.Of(20, 20));
+        Map<String,String> returnMap = new HashMap<>();
         String returnString;
         try {
             LinkedHashMap<String, Object> locationMap = satelite.getPositions().getFirst();
@@ -62,9 +63,13 @@ public class SateliteController {
             } catch (Exception e) {
                 returnString = "Image not avaliable for coordinates: " + lat + " " + lon;
             }
-            return returnString;
+            returnMap.put("image", returnString);
+            return returnMap;
         } catch (Exception e){
-            return "Satelite not found";
+            returnString = "Satelite not found";
+            returnMap.clear();
+            returnMap.put("image", returnString);
         }
+        return returnMap;
     }
 }
