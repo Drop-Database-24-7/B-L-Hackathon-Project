@@ -4,7 +4,7 @@ import { Combobox } from "@/components/ui/Combobox";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import  MapComponent from "@/components/MapComponent";
-import { getSatellites }  from '@/features/post'
+import { getImage, getSatellites }  from '@/features/get'
 import { ImageCard } from "@/components/ui/ImageCard";
 import useLocationStore from "@/zooStore/store";
 import { useEffect, useState } from "react";
@@ -27,6 +27,7 @@ const StatusDisplay = () => {
       fetchSatellites();
     }
   }, [isReady, setSatellites]);
+   
 
   return (
     <Card className="absolute bottom-14 left-4 z-40 p-0 bg-black text-white bg-opacity-80 border border-gray-300 rounded-lg shadow-lg">
@@ -43,10 +44,24 @@ const StatusDisplay = () => {
 
 export default function Home() {
   const { isImageReady, imageUrl, setImage } = useStoreImage();
+  const { currentSat, sattellites, setSatellites } = useSatelliteStore()
 
-  const handleShowClick = () => {
-    setImage("https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg");
+  const handleShowClick = async () => {
+    console.log(currentSat)
+    const imgData = await getImage(currentSat)
+    console.log(imgData)
+    
+    setImage(imgData)
+
   };
+
+
+    // const onSubmit = async () => {
+    //   console.log("Hello From Submit");
+    //   const data = await getSatellites(52.0943, 19.4565);
+    //   setSatellites(data)
+    // }
+
 
   return (
     <div className="relative">

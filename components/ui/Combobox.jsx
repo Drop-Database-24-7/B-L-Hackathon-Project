@@ -19,14 +19,26 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import useSatelliteStore from "@/zooStore/satellitesStore"
+import { useState, useEffect } from "react"
 
 
 export function Combobox() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState("")
+  const [ current, setCurrent] = useState(-1)
+  const { currentSat, setCurrentSat } = useSatelliteStore() 
+
+  useEffect(() => {
+    if(value != "")
+    {
+      const id = satellites.above.find(item => item.satname == value).satid;
+      setCurrentSat(id)
+      console.log(id)
+    }
+
+  }, [value])
 
   const { satellites } = useSatelliteStore() 
-  
    
 
   return (
@@ -39,7 +51,7 @@ export function Combobox() {
           className="w-[200px] justify-between"
         >
           {value
-            ? satellites.above.find((sat) => sat.satname === value)?.label
+            ? satellites.above.find((sat) => sat.satname === value)?.satname
             : "Select satelite..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -52,11 +64,12 @@ export function Combobox() {
             <CommandGroup>
               {satellites.above?.map((sat) => (
                 <CommandItem
-                  key={sat.satname}
+                  key={sat.satname + sat.satid}
                   value={sat.value}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)
+                    setCurrent(current)
                   }}
                 >
                   <Check
