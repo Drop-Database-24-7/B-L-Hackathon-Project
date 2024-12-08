@@ -61,7 +61,7 @@ export function Combobox() {
           className="w-[200px] justify-between"
         >
           {value
-            ? satellites.find((sat) => sat.satname === value)?.label
+            ? satellites.above.find((sat) => sat.satname === value)?.label
             : "Select satelite..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
