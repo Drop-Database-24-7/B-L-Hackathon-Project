@@ -87,11 +87,11 @@ const Map = () => {
         </Marker>
       )}
       
-      {satellites.map((satellite) => (
+      {/* {satellites.map((satellite) => (
         <Marker key={satellite.id} position={satellite.position} icon={satelliteIcon}>
           <Popup>{satellite.name}</Popup>
         </Marker>
-      ))}
+      ))} */}
     </MapContainer>
   );
 };
