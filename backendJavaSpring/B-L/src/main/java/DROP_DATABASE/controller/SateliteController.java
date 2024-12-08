@@ -59,7 +59,7 @@ public class SateliteController {
             double lat = (double) locationMap.get("satlongitude");
 
             try {
-                returnString = imageService.getImage(Point.Of((float) lat, (float) lon)).getImageUrl();
+                returnString = imageService.getImage(Point.Of((float) lon, (float) lat)).getImageUrl();
             } catch (Exception e) {
                 returnString = "Image not avaliable for coordinates: " + lat + " " + lon;
             }
