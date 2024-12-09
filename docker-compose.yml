@@ -1,0 +1,12 @@
+#version: '3.8'
+services:
+  frontend:
+    container_name: react_container
+    build: .\frontwns\B-L-Hackathon-Project
+    ports:
+      - "3000:3000"
+  backend:
+    container_name: java_container
+    build: .\backend\B-L-Hackathon-Project\backendJavaSpring\B-L
+    ports: 
+      - "8080:8080"
